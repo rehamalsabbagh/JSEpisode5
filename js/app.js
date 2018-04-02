@@ -58,7 +58,7 @@ function sendMessage() {
 		username: usernameInput.value,
 		message: messageInput.value
 	};
-  axios.post('http://192.168.1.21/messages/create/', newMessage)
+  axios.post('http://192.168.100.54/messages/create/', newMessage)
 		.then(() => {
 			createNewMessage(newMessage);
 			messageInput.value = '';
@@ -78,11 +78,10 @@ function sendMessage() {
 *		(you can use createNewMessage to do this)
 *****************************************************/
 function getAllMessages() {
-	let url = 'http://192.168.1.21/messages/?latest=' + (latestTimestamp || '');
+	let url = 'http://192.168.100.54/messages/?latest=' + (latestTimestamp || '');
 	axios.get(url)
 		.then(res => res.data)
 		.then(newMessages => {
-			console.log(newMessages);
 			newMessages.forEach(createNewMessage)
 			if (newMessages.length) {
 				latestTimestamp = newMessages.pop().timestamp;
