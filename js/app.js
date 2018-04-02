@@ -77,7 +77,7 @@ function sendMessage() {
 *		messages area.
 *		(you can use createNewMessage to do this)
 *****************************************************/
-function getAllMessages() {
+function getNewMessages() {
 	let url = 'http://192.168.1.21/messages/?latest=' + (latestTimestamp || '');
 	axios.get(url)
 		.then(res => res.data)
@@ -114,3 +114,6 @@ function editUsername() {
 
   usernameSection.classList.toggle('editMode');
 };
+
+
+setInterval(getNewMessages, 3000);
