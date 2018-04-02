@@ -60,7 +60,6 @@ function sendMessage() {
 	};
   axios.post('http://192.168.1.21/messages/create/', newMessage)
 		.then(() => {
-			createNewMessage(newMessage);
 			messageInput.value = '';
 		})
 		.catch(error => console.error(error));
