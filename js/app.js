@@ -60,7 +60,6 @@ function sendMessage() {
 	};
   axios.post('http://192.168.100.54/messages/create/', newMessage)
 		.then(() => {
-			createNewMessage(newMessage);
 			messageInput.value = '';
 		})
 		.catch(error => console.error(error));
@@ -113,3 +112,6 @@ function editUsername() {
 
   usernameSection.classList.toggle('editMode');
 };
+
+
+setInterval(getNewMessages, 3000);
