@@ -9,6 +9,7 @@ const editButton = document.getElementById("edit-username-button");
 const messageInput = document.getElementById("new-message");
 const sendButton = document.getElementById("send-button");
 const messages = document.getElementById("messages");
+getAllMessages();
 
 // Add a click handlers to global buttons
 sendButton.onclick = sendMessage;
@@ -52,8 +53,15 @@ function createNewMessage(messageObj) {
 * - Don't forget to clear the message input.
 *****************************************************/
 function sendMessage() {
-  // Complete me!
-};
+messageObj = {username: usernameInput.value ,message: messageInput.value}
+
+axios.post('http://192.168.100.54/messages/create/', messageObj)
+    .then(response => {
+        createNewMessage(messageObj);
+        messageInput.value = '';
+    })
+    .catch(error => console.error(error));
+  }
 
 
 /*****************************************************
@@ -67,7 +75,21 @@ function sendMessage() {
 *		(you can use createNewMessage to do this)
 *****************************************************/
 function getAllMessages() {
-  // Complete me!
+  axios.get('http://192.168.100.54/messages/')
+    .then(function(response){
+        return response.data;
+    })
+    .then(function(data){
+      document.getElementById('messages').innerHTML = "";
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        createNewMessage(data[i]);
+      }
+         
+    })
+    .catch(function(error){
+        // do something with the error
+    });
 };
 
 
